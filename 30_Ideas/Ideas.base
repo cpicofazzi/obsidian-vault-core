@@ -1,0 +1,50 @@
+filters:
+  or:
+    - file.hasTag("idea")
+    - file.inFolder("30_Ideas")
+formulas:
+  stage_badge: if(stage, stage, "💡 Spark")
+  domain_label: if(domain, domain, "General")
+properties:
+  stage:
+    displayName: Stage
+  domain:
+    displayName: Domain
+  effort:
+    displayName: Effort
+  value:
+    displayName: Value
+  formula.stage_badge:
+    displayName: Stage
+  formula.domain_label:
+    displayName: Domain
+views:
+  - type: cards
+    name: Idea Gallery
+    order:
+      - file.name
+      - stage
+      - domain
+      - effort
+      - value
+  - type: table
+    name: By Stage
+    groupBy:
+      property: stage
+      direction: ASC
+    order:
+      - file.name
+      - stage
+      - domain
+      - effort
+      - value
+  - type: table
+    name: AI & Tech
+    filters:
+      and:
+        - domain == "AI/Tech"
+    order:
+      - file.name
+      - stage
+      - effort
+      - value

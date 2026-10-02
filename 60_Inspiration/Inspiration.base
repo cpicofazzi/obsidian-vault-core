@@ -1,0 +1,84 @@
+filters:
+  or:
+    - file.hasTag("inspiration")
+    - file.inFolder("60_Inspiration")
+
+properties:
+  category:
+    displayName: "Category"
+  specific_category:
+    displayName: "Topic"
+  author:
+    displayName: "Creator"
+  likes:
+    displayName: "Likes"
+  created:
+    displayName: "Saved Date"
+
+views:
+  - type: cards
+    name: "Inspiration Gallery"
+    order:
+      - file.name
+      - category
+      - specific_category
+      - author
+      - likes
+
+  - type: table
+    name: "By Category"
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - file.name
+      - specific_category
+      - author
+      - likes
+      - created
+
+  - type: table
+    name: "AI & Dev Tools"
+    filters:
+      or:
+        - 'category == "AI & Autonomous Agents"'
+        - 'category == "Dev Tools & Repos"'
+    order:
+      - file.name
+      - category
+      - specific_category
+      - author
+      - likes
+
+  - type: table
+    name: "Robotics & Hardware"
+    filters:
+      and:
+        - 'category == "Robotics & Hardware"'
+    order:
+      - file.name
+      - specific_category
+      - author
+      - likes
+
+  - type: table
+    name: "Athletics & Training"
+    filters:
+      and:
+        - 'category == "Athletics & Training"'
+    order:
+      - file.name
+      - specific_category
+      - author
+      - likes
+
+  - type: table
+    name: "Gardening & Homestead"
+    filters:
+      and:
+        - 'category == "Gardening & Homestead"'
+    order:
+      - file.name
+      - specific_category
+      - author
+      - likes

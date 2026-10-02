@@ -1,0 +1,31 @@
+# ==========================================
+# Pico Vault .gitignore
+# ==========================================
+
+# 1. Personal & Vault Markdown Notes
+# Ignore all markdown notes to keep personal notes private
+*.md
+!README.md
+
+# 2. Sensitive Personal Documents & Records
+Assets/Documents/
+*.pdf
+20_Areas/Safe & Records/
+
+# 3. Python Cache & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# 4. Obsidian Local Workspace & Cache
+.obsidian/workspace*.json
+.obsidian/cache/
+
+# 5. OS & Temporary Files
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp

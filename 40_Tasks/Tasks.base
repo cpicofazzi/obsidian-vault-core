@@ -1,0 +1,67 @@
+filters:
+  or:
+    - file.hasTag("task")
+    - file.inFolder("40_Tasks")
+
+formulas:
+  days_until_due: 'if(due_date, (date(due_date) - today()).days, "")'
+  is_overdue: 'if(due_date, date(due_date) < today() && status != "done", false)'
+  priority_badge: 'if(priority, priority, "🟡 Medium")'
+
+properties:
+  status:
+    displayName: "Status"
+  priority:
+    displayName: "Priority"
+  due_date:
+    displayName: "Due Date"
+  project:
+    displayName: "Project"
+  formula.days_until_due:
+    displayName: "Days Left"
+  formula.is_overdue:
+    displayName: "Overdue"
+  formula.priority_badge:
+    displayName: "Priority"
+
+views:
+  - type: table
+    name: "Active Tasks"
+    filters:
+      and:
+        - 'status != "done"'
+    order:
+      - file.name
+      - status
+      - priority
+      - due_date
+      - formula.days_until_due
+      - project
+    groupBy:
+      property: priority
+      direction: ASC
+
+  - type: table
+    name: "Overdue / Urgent"
+    filters:
+      and:
+        - 'status != "done"'
+        - or:
+            - 'priority == "🔴 High"'
+            - 'formula.is_overdue == true'
+    order:
+      - file.name
+      - status
+      - priority
+      - due_date
+      - project
+
+  - type: table
+    name: "Completed"
+    filters:
+      and:
+        - 'status == "done"'
+    order:
+      - file.name
+      - completed_date
+      - project
